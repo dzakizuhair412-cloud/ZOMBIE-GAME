@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Escape 3D</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading">
+        <h1>Zombie Escape 3D</h1>
+        <p>Memuat dunia...</p>
+    </div>
+
+    <!-- Crosshair -->
+    <div id="crosshair"></div>
+
+    <!-- HUD -->
+    <div id="hud">
+
+        <div class="box">
+            ❤️ HP
+            <span id="hp">100</span>
+        </div>
+
+        <div class="box">
+            🔫 Senjata
+            <span id="weapon">Pisau</span>
+        </div>
+
+        <div class="box">
+            💥 Peluru
+            <span id="ammo">-</span>
+        </div>
+
+        <div class="box">
+            🧟 Zombie
+            <span id="zombie">9 / 9</span>
+        </div>
+
+        <div class="box">
+            ⏱️
+            <span id="timer">10:00</span>
+        </div>
+
+    </div>
+
+    <!-- Pesan -->
+    <div id="message"></div>
+
+    <!-- Tempat Three.js -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- File utama game -->
+    <script type="module" src="main.js"></script>
+
+</body>
+</html>
