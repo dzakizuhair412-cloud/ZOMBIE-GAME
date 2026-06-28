@@ -1,16 +1,18 @@
-// ============================
+// ==============================
 // Zombie Escape 3D
 // main.js
-// ============================
+// ==============================
 
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+import { createMap } from "./map.js";
 
+// Canvas
 const canvas = document.getElementById("gameCanvas");
 
 // Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x050505);
-scene.fog = new THREE.Fog(0x050505, 18, 60);
+scene.fog = new THREE.Fog(0x050505, 20, 80);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -24,17 +26,75 @@ camera.position.set(0, 1.8, 0);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-    canvas,
+    canvas: canvas,
     antialias: true
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.shadowMap.enabled = true;
 
-// =======================
-// LIGHT
-// =======================
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+// ==============================
+// Lighting
+// ==============================
+
+// Cahaya redup
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+scene.add(ambientLight);
+
+// Lampu utama
+const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+
+mainLight.position.set(10, 15, 10);
+
+mainLight.castShadow = true;
+
+scene.add(mainLight);
+
+// ==============================
+// MAP
+// ==============================
+
+createMap(scene);
+
+// ==============================
+// Resize
+// ==============================
+
+window.addEventListener("resize", () => {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+});
+
+// ==============================
+// Hilangkan Loading
+// ==============================
+
+document.getElementById("loading").style.display = "none";
+
+// ==============================
+// Game Loop
+// ==============================
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    renderer.render(scene, camera);
+
+}
+
+animate();// =======================
 
 // Cahaya redup
 const ambient = new THREE.AmbientLight(0xffffff,0.45);
